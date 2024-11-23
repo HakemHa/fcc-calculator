@@ -178,18 +178,18 @@ export const calcSlice = createSlice({
             }
             else if ( operations.includes(last[last.length-1]) ) {
                 let eval_expression = expression.slice(0, expression.length-last.length)
-                result = eval(eval_expression.replace("·", "*")).toString()
+                result = eval(eval_expression.replaceAll("·", "*")).toString()
                 new_expression = eval_expression + "=" + result
             }
             else if ( last == "=" ) {
                 new_expression = expression
             }
             else if ( last[last.length-1] == "." ) {
-                result = eval(expression.replace("·", "*")).toString()
+                result = eval(expression.replaceAll("·", "*")).toString()
                 new_expression = expression + "=" + result
             }
             else {
-                result = eval(expression.replace("·", "*")).toString()
+                result = eval(expression.replaceAll("·", "*")).toString()
                 new_expression = expression + "=" + result
             }
             return {
