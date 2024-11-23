@@ -63,7 +63,7 @@ export const calcSlice = createSlice({
             }
             else if ( last == "=" ) {
                 let index_of_equal = expression.indexOf("=")
-                result = expression.slice(index_of_equal+1, expression.length)
+                let result = expression.slice(index_of_equal+1, expression.length)
                 new_expression = result
                 new_last = operation
             }
@@ -106,8 +106,8 @@ export const calcSlice = createSlice({
                 }
             }
             else if ( last[last.length-1] == "." ) {
-                new_expression = expression.slice(0, expression.length-1)
-                new_last = "."
+                new_expression = expression.slice(0, expression.length-last.length)
+                new_last = last
             }
             else {
                 new_expression = expression.slice(0, expression.length-last.length)
@@ -150,8 +150,14 @@ export const calcSlice = createSlice({
                 new_last = last + number
             }
             else {
-                new_expression += number
-                new_last = last + number
+                if (last == "0") {
+                    new_expression = number;
+                    new_last = number;
+                }
+                else {
+                    new_expression += number
+                    new_last = last + number
+                }
             }
             return {
                 expression: new_expression,
